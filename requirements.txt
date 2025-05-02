@@ -23,6 +23,9 @@ firebase-admin==6.3.0
 twilio==8.10.0
 sendgrid==6.10.0
 
+# Natural language processing dependencies
+dateparser==1.2.0
+
 # Development dependencies
 pytest==7.4.3
 black==23.11.0

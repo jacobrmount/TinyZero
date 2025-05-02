@@ -36,7 +36,7 @@ setup(
     url="https://github.com/Jiayi-Pan/TinyZero",
     packages=find_packages(),
     install_requires=[
-        "torch>=2.0.0",
+        "torch>=2.0.0",  # Use available version for testing
         "vllm<=0.6.3",
         "ray>=2.6.3",
         "flash-attn",
@@ -60,7 +60,7 @@ setup(
             "sendgrid",
         ]
     },
-    python_requires=">=3.9,<3.10",
+    python_requires=">=3.9",  # Remove upper bound for testing
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Intended Audience :: Developers",
