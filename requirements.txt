@@ -1,5 +1,5 @@
 # Core ML dependencies
-torch==2.4.0
+torch>=2.6.0
 vllm==0.6.3
 ray==2.9.3
 flash-attn==2.5.5
