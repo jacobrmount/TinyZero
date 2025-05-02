@@ -15,40 +15,60 @@
 # setup.py is the fallback installation script when pyproject.toml does not work
 from setuptools import setup, find_packages
 import os
+import re
 
-version_folder = os.path.dirname(os.path.join(os.path.abspath(__file__)))
+# Read the version from the __init__.py file
+with open(os.path.join("remedy", "__init__.py"), encoding="utf-8") as f:
+    version = re.search(r'__version__ = "(.*?)"', f.read()).group(1)
 
-with open(os.path.join(version_folder, 'verl/version/version')) as f:
-    __version__ = f.read().strip()
-
-
-with open('requirements.txt') as f:
-    required = f.read().splitlines()
-    install_requires = [item.strip() for item in required if item.strip()[0] != '#']
-
-extras_require = {
-    'test': ['pytest', 'yapf']
-}
-
-from pathlib import Path
-this_directory = Path(__file__).parent
-long_description = (this_directory / "README.md").read_text()
+# Read the README for the long description
+with open("README.md", encoding="utf-8") as f:
+    long_description = f.read()
 
 setup(
-    name='verl',
-    version=__version__,
-    package_dir={'': '.'},
-    packages=find_packages(where='.'),
-    url='https://github.com/volcengine/verl',
-    license='Apache 2.0',
-    author='Bytedance - Seed - MLSys',
-    author_email='zhangchi.usc1992@bytedance.com, gmsheng@connect.hku.hk',
-    description='veRL: Volcano Engine Reinforcement Learning for LLM',
-    install_requires=install_requires,
-    extras_require=extras_require,
-    package_data={'': ['version/*'],
-                  'verl': ['trainer/config/*.yaml'],},
-    include_package_data=True,
+    name="remedy",
+    version=version,
+    description="A framework for building conversational agents with event monitoring capabilities",
     long_description=long_description,
-    long_description_content_type='text/markdown'
+    long_description_content_type="text/markdown",
+    author="Remedy Team",
+    author_email="team@remedy.ai",
+    url="https://github.com/Jiayi-Pan/TinyZero",
+    packages=find_packages(),
+    install_requires=[
+        "torch>=2.0.0",
+        "vllm<=0.6.3",
+        "ray>=2.6.3",
+        "flash-attn",
+        "wandb",
+        "matplotlib",
+        "IPython",
+        "transformers<4.48",
+        "accelerate",
+        "datasets",
+    ],
+    extras_require={
+        "dev": [
+            "pytest",
+            "black",
+            "flake8",
+            "mypy"
+        ],
+        "mobile": [
+            "firebase-admin",
+            "twilio",
+            "sendgrid",
+        ]
+    },
+    python_requires=">=3.9,<3.10",
+    classifiers=[
+        "Development Status :: 3 - Alpha",
+        "Intended Audience :: Developers",
+        "Intended Audience :: Science/Research",
+        "License :: OSI Approved :: MIT License",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.9",
+        "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    ],
+    keywords="llm, reinforcement-learning, event-monitoring, conversational-ai",
 )

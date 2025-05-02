@@ -1,0 +1,26 @@
+name: remedy
+channels:
+  - pytorch
+  - nvidia
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.9
+  - pytorch=2.4.0
+  - pytorch-cuda=12.1
+  - pip=23.1.2
+  - pip:
+    - vllm==0.6.3
+    - ray>=2.6.3
+    - flash-attn
+    - wandb
+    - IPython
+    - matplotlib
+    # Additional dependencies for veRL framework
+    - transformers>=4.31.0
+    - accelerate>=0.21.0
+    - datasets>=2.13.0
+    - peft>=0.4.0
+    - bitsandbytes>=0.41.0
+    - scikit-learn>=1.2.2
+    - pyarrow>=12.0.1 
